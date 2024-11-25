@@ -12,9 +12,10 @@ logging.basicConfig(level=logging.INFO)
 # create kafka topic
 
 ORDER_KAFKA_TOPIC = "order-details"
-ORDER_LIMIT = 15
+ORDER_LIMIT = 150
+BOOT_STRAP_SERVERS = 'kafka-local.orders-microservice.svc.cluster.local:9092'
 
-producer = KafkaProducer(bootstrap_servers='kafka-local.orders-microservice.svc.cluster.local:9092')
+producer = KafkaProducer(bootstrap_servers=BOOT_STRAP_SERVERS)
 
 def create_orders():
     f = faker.Faker()
@@ -24,7 +25,7 @@ def create_orders():
         first_name=f.first_name(),
         last_name=f.last_name(),
         email=f.email(),
-        queantity=int(random.randint(1, 999)),
+        quantity=int(random.randint(1, 999)),
         price=round(float(random.uniform(10.5, 100.99)), 2),
         date_created=str(datetime.now())
     )
@@ -42,4 +43,4 @@ if __name__ == '__main__':
         #send orders to kafka topic
         producer.send(ORDER_KAFKA_TOPIC, json.dumps(data).encode('utf-8'))
         logging.info(f"Order {data['order_id']} sent to kafka topic")
-        time.sleep(1)
+        time.sleep(3)
