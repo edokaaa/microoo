@@ -14,6 +14,7 @@ logging.basicConfig(level=logging.INFO)
 ORDER_KAFKA_TOPIC = "order-details"
 ORDER_LIMIT = 150
 BOOT_STRAP_SERVERS = 'kafka-local.orders-microservice.svc.cluster.local:9092'
+# BOOT_STRAP_SERVERS = 'localhost:9092'
 
 producer = KafkaProducer(bootstrap_servers=BOOT_STRAP_SERVERS)
 

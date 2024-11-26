@@ -1,10 +1,6 @@
 import json
 import time
-import uuid
 import logging
-import faker
-import random
-from datetime import datetime
 from kafka import KafkaProducer, KafkaConsumer
 
 logging.basicConfig(level=logging.INFO)
@@ -13,9 +9,8 @@ logging.basicConfig(level=logging.INFO)
 
 ORDER_KAFKA_TOPIC = "order-details"
 ORDER_PROCESSED_KAFKA_TOPIC = "order-processed"
-# BOOT_STRAP_SERVERS = 'kafka-local.orders-microservice.svc.cluster.local:9092'
-BOOT_STRAP_SERVERS = 'localhost:9092'
-ORDER_LIMIT = 10
+BOOT_STRAP_SERVERS = 'kafka-local.orders-microservice.svc.cluster.local:9092'
+# BOOT_STRAP_SERVERS = 'localhost:9092'
 
 # consumer
 consumer = KafkaConsumer(
